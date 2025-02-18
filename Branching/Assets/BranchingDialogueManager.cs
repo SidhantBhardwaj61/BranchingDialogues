@@ -54,11 +54,15 @@ public class BranchingDialogueManager : MonoBehaviour
         }
 
         foreach (var choice in currentNode.choices)
-        {
-            Button newButton = Instantiate(choiceButtonPrefab, choicesContainer.transform);
-            newButton.GetComponentInChildren<Text>().text = choice.text;
-            
-        }
+{
+    Button newButton = Instantiate(choiceButtonPrefab, choicesContainer.transform);
+    newButton.GetComponentInChildren<TMPro.TMP_Text>().text = choice.text;
+
+
+    string nextNode = choice.nextNodeId;  // Store choice in a local variable
+    newButton.onClick.AddListener(() => ChooseNextNode(nextNode));
+}
+
     }
 
     public void ChooseNextNode(string nextNodeId)
